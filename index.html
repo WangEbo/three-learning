@@ -30,6 +30,30 @@
     
     scene.add(mesh); //网格模型添加到场景中
 
+    // 添加几何体需要创建一个几何体对象和一个材质对象，把这两个对象作为网格模型对象MESH 的参数传入
+    // 在场景中添加这个网格模型对象
+    var ball = new THREE.SphereGeometry(60, 40, 40);
+    var materialBall = new THREE.MeshLambertMaterial({
+        // color:0xff0000,
+        // opacity:0.7,
+        // transparent:true,
+        // wireframe: true,//几何图形渲染为线框
+        color:0x0000ff,
+        specular:0x4488ee,
+        shininess:12
+    })
+    ball.boundingSphere.center = {
+        x:100,
+        y:200,
+        z:0
+    }
+    var meshBall = new THREE.Mesh(ball, materialBall);
+    scene.add(meshBall)
+
+
+/*****光源对象*****/
+
+
     //创建点光源
     var point = new THREE.PointLight(0xffffff);
     point.position.set(400, 200, 300);
@@ -47,12 +71,22 @@
     var k = width / height; //窗口宽高比
     var s = 200; //三维场景显示范围控制系数，系数越大，显示的范围越大
 
+
+/*****相机对象*****/
+
+
     // 创建相机对象
     var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
     //设置相机位置
     camera.position.set(200,300,200);
     // 设置相机方向
     camera.lookAt(scene.position);
+
+/*****辅助三位坐标系*****/
+    var axisHelper = new THREE.AxisHelper(300);
+    scene.add(axisHelper);
+
+/*****渲染器对象*****/
 
 
     //创建渲染器对象
@@ -61,10 +95,18 @@
     renderer.setClearColor(0x9d3ff, 1);//设置背景颜色
     //body钟插入canvas 对象
     document.body.appendChild(renderer.domElement);
-    renderer.render(scene, camera);
+    
+    var t0 = new Date();
+    function draw(){
+        var t1 = new Date();
+        var t = t1 - t0;
+        t0 = t1;
+        renderer.render(scene, camera);
+        mesh.rotateY(0.001*t);
+        requestAnimationFrame(draw)
+    }
 
-
-
+    draw()
 
 </script>
 </html>
