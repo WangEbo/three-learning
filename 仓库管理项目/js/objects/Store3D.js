@@ -51,11 +51,10 @@ class Store3D{
         this.controls.dampingFactor = 0.5;//阻尼系数
         this.controls.minDistance = 0;//视角最小距离
         this.controls.maxDistance = 2000;//视角最大距离
-        this.controls.maxPolarAngle = Math.PI / 2.2;//最大角度
+        // this.controls.maxPolarAngle = Math.PI / 2.2;//最大角度
     }
 
     initStats(){
-        debugger
         this.stats = new Stats()
         this.stats.dom.style.position = 'absolute';
         this.stats.dom.style.lefe = '0';
@@ -132,7 +131,11 @@ class Store3D{
             switch (object.objectType){
                 case "cube":
                     let cube = new Cube(object);
-                    this.addObject(cube)
+                    this.addObject(cube);
+                    break
+                case "wall":
+                    let wall = new Wall(object);
+                    this.addObject(wall);
             }
         }
     }

@@ -1,7 +1,32 @@
 const utils = {};
 
+let MeshCombineType = {
+    intersect: 0,   //交集
+    union: 1,   //并集
+    subtract: 2,   //差集
+}
+
+function ObjectCombine(originObject, combineObject, meshCombineType){
+    let resultBsp = null;
+    let originalBsp = new ThreeBSP(originObject);
+    let combineBsp = new ThreeBSP(combineObject);
+
+    if(meshCombineType == MeshCombineType.union){
+        resultBsp = originalBsp.union(combineBsp)
+    }else if(meshCombineType == MeshCombineType.intersect){
+        resultBsp = originalBsp.intersect(combineBsp)
+    }else if(meshCombineType == MeshCombineType.subtract){
+        resultBsp = originalBsp.subtract(combineBsp)
+    }
+
+    let material = originObject.material;
+    let result = resultBsp.toMesh(material);
+    result.castShadow = true;
+    return result
+}
+
 utils.hasObj = function (obj){
-    return typeof obj == 'object'
+    return (obj != null && typeof obj != "undefined")
 }
 
 utils.createMaterial = function (lenght, width, style){

@@ -2,33 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22283352-5815-438e-b2be-9472c30d23db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/css/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/css/index.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/css/store.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/img/floor.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/js/Data/BuildingData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/js/common/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/js/objects/Cube.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/js/objects/Store3D.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/CopyShader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/EffectComposer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/MTLLoader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/OBJLoader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/OrbitControls.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/OutlinePass.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/PointerLockControls.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/RenderPass.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/ShaderPass.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/ThreeBSP.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/Tween.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/dat.gui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/echarts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/jquery-1.11.0.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/jquery-ui.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/stats.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/仓库管理项目/lib/three.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/three.js" beforeDir="false" afterPath="$PROJECT_DIR$/three.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/仓库管理项目/js/objects/Wall.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/仓库管理项目/css/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/仓库管理项目/css/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/仓库管理项目/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/仓库管理项目/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/仓库管理项目/js/Data/BuildingData.js" beforeDir="false" afterPath="$PROJECT_DIR$/仓库管理项目/js/Data/BuildingData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/仓库管理项目/js/common/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/仓库管理项目/js/common/utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/仓库管理项目/js/objects/Store3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/仓库管理项目/js/objects/Store3D.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +64,7 @@
       <updated>1605757229726</updated>
       <workItem from="1605757230928" duration="6448000" />
       <workItem from="1605834738885" duration="8859000" />
+      <workItem from="1606097421005" duration="9826000" />
     </task>
     <servers />
   </component>
@@ -99,9 +80,9 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="968" y="269" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605855758727" />
-    <state x="1193" y="244" width="672" height="678" key="search.everywhere.popup" timestamp="1605841320907">
+    <state x="1193" y="244" width="672" height="678" key="search.everywhere.popup" timestamp="1606097948707">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1193" y="244" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1605841320907" />
+    <state x="1193" y="244" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1606097948707" />
   </component>
 </project>
