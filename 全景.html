@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>three.js css3d - panorama</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        body {
+            background-color: #000000;
+            margin: 0;
+            cursor: move;
+            overflow: hidden;
+        }
+        .surface { width: 1026px; height: 1026px; background-size: cover; position: absolute; }
+        .surface .bg { position: absolute; width: 1026px; height: 1026px; }
+    </style>
+</head>
+<body>
+<div>
+    <div id="surface_0" class="surface">
+        <img class="bg" src="images/posx.jpg" alt="">
+    </div>
+    <div id="surface_1" class="surface">
+        <img class="bg" src="images/negx.jpg" alt="">
+    </div>
+    <div id="surface_2" class="surface">
+        <img class="bg" src="images/posy.jpg" alt="">
+    </div>
+    <div id="surface_3" class="surface">
+        <img class="bg" src="images/negy.jpg" alt="">
+    </div>
+    <div id="surface_4" class="surface">
+        <img class="bg" src="images/posz.jpg" alt="">
+    </div>
+    <div id="surface_5" class="surface">
+        <img class="bg" src="images/negz.jpg" alt="">
+    </div>
+</div>
+    <script src="./three.js"></script>
+    <script src="./js/CSS3DRenderer.min.js"></script>
+    <script>
+
+        var scene, camera, lng, lat, moveFlag;
+
+        lng = 0,
+        lat = 0,
+        moveFlag = false,
+        scene = new THREE.Scene(),
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
+        camera.position.set(0, 0, 0);
+        //创建6个面 形成一个闭合的场景
+        var sides = [
+            {
+                position:[512, 0, 0],
+                rotation:[0, Math.PI/2, 0]
+            },
+            {
+                position:[-512, 0, 0],
+                rotation:[0, -Math.PI/2, 0]
+            },
+            {
+                position:[0, 512, 0],
+                rotation:[Math.PI/2, 0, 0]
+            },
+            {
+                position:[0, -512, 0],
+                rotation:[-Math.PI/2, 0, 0]
+            },
+            {
+                position:[0, 0, 512],
+                rotation:[0, Math.PI, 0]
+            },
+            {
+                position:[0, 0, -512],
+                rotation:[0, 0, 0]
+            }
+        ]
+
+        for(var i=0;i<6;i++){
+            var curSide = sides[i];
+            var element = document.querySelector('#surface_'+i);
+            element.width = 1026;
+
+            var obj = new THREE.CSS3DObject(element);
+            obj.position.fromArray(curSide.position);
+            obj.rotation.fromArray(curSide.rotation);
+            scene.add(obj)
+        }
+
+        var renderer = new THREE.CSS3DRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        renderer.render(scene, camera)
+        document.body.appendChild(renderer.domElement);
+
+        function draw() {
+
+            // camera.lookAt()
+            
+            // 帧动画渲染 一直执行，在鼠标挪动时，根据挪动幅度，调整 相机角度，
+            // 渲染出对应的视图
+            requestAnimationFrame(draw);
+        }
+
+        document.addEventListener('mousedown', mouseDown)
+        function mouseDown(e) {
+            moveFlag = true;
+        }
+
+        document.addEventListener('mousemove', mouseMove)
+        function mouseMove(e) {
+            console.log(e);
+            var movementX = event.movementX || event.mozMovementX || event.webkitMovementX || 0;
+            var movementY = event.movementY || event.mozMovementY || event.webkitMovementY || 0;
+            
+        }
+
+        document.addEventListener('touchstart', touchStart)
+        function touchStart(e){
+
+        }   
+
+        document.addEventListener('touchmove', touchMove)
+        function touchMove(e) {
+            
+        }
+
+        document.addEventListener('mouseup',function mouseUp(params) {
+            document.removeEventListener('mousedown',mouseDown);
+            document.removeEventListener('touchstart',touchStart)
+            document.removeEventListener('touchmove',touchMove  )
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="./three.js"></script>
+   <script src="./libs/WebGL.js"></script>
+   <style>
+       #canvas1, #canvas2, #canvas3 {
+            position: relative;
+            display: block;
+            border: 1px solid red  ;  
+        }
+
+        #canvas1 {
+            width: 300px;
+            height: 200px;
+        }
+
+        #canvas2 {
+            width: 400px;
+            height: 100px;
+            left: 150px;
+        }
+
+        #canvas3 {
+            width: 200px;
+            height: 300px;
+            left: 75px;
+        }   
+   </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="canvas1"></canvas>
+        <canvas id="canvas2"></canvas>
+        <canvas id="canvas3"></canvas>
+    </div>
+</body>
+<script>
+    if ( WEBGL.isWebGLAvailable() === false ) {
+
+        document.body.appendChild( WEBGL.getWebGLErrorMessage() );
+
+    }
+
+    var scene, light, renderer;
+    var views = [];
+    
+    var mouseX = 0, mouseY = 0;
+
+    var windowHalfX = window.innerWidth/2,
+        windowHalfY = window.innerHeight/2;
+
+    function getEleByid (id){
+        return document.getElementById(id)
+    }
+    init();
+    animate();
+
+
+    function View(canvas, fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight){
+        canvas.width = viewWidth * window.devicePixelRatio
+        canvas.height = viewHeight * window.devicePixelRatio
+
+        var context = canvas.getContext('2d');
+
+        var camera = new THREE.PerspectiveCamera(20, viewWidth/viewHeight, 1, 10000)
+        camera.setViewOffset(fullWidth, fullHeight, viewX, viewY, viewWidth, viewHeight)
+        camera.position.z = 1800;
+
+        this.render = function () {
+
+            camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+            camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+            camera.lookAt( scene.position );
+
+            renderer.setViewport( 0, 0, viewWidth, viewHeight );
+            renderer.render( scene, camera );
+
+            context.drawImage( renderer.domElement, 0, 0 );
+
+        };
+    }
+
+    function init(){
+        var canvas1 = document.getElementById( 'canvas1' );
+        var canvas2 = document.getElementById( 'canvas2' );
+        var canvas3 = document.getElementById( 'canvas3' );
+
+        var fullWidth = 550;
+        var fullHeight = 600;
+
+        views.push( new View( canvas1, fullWidth, fullHeight,   0,   0, canvas1.clientWidth, canvas1.clientHeight ) );
+        views.push( new View( canvas2, fullWidth, fullHeight, 150, 200, canvas2.clientWidth, canvas2.clientHeight ) );
+        views.push( new View( canvas3, fullWidth, fullHeight,  75, 300, canvas3.clientWidth, canvas3.clientHeight ) );
+
+        //
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color( 0xffffff );
+
+        var light = new THREE.DirectionalLight( 0xffffff );
+        light.position.set( 0, 0, 1 ).normalize();
+        scene.add( light );
+        // createSides();
+
+        createSides();
+
+        var axisHelper = new THREE.AxesHelper(300, 300)
+        scene.add(axisHelper);
+
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setSize(fullWidth, fullHeight);
+
+        renderer1 = new THREE.WebGLRenderer( { antialias: true } );
+        renderer1.setPixelRatio(window.devicePixelRatio);
+        renderer1.setSize(fullWidth, fullHeight);
+        document.body.appendChild(renderer1.domElement)
+
+        document.addEventListener('mousemove', onDocumentMouseMove, false)
+    }
+
+    
+    function renderComplete(){
+        var viewX = 0, viewY = 0,fullWidth = 550, fullHeight = 600;
+        var camera_1 = new THREE.PerspectiveCamera(20, fullWidth/fullHeight, 1, 10000);
+        camera_1.position.z = 1800;
+        camera_1.position.x += ( mouseX - camera_1.position.x ) * 0.05;
+        camera_1.position.y += ( - mouseY - camera_1.position.y ) * 0.05;
+        camera_1.lookAt( scene.position );
+        renderer1.render(scene,camera_1);
+    }
+
+    function createSides(){
+        var radius = 200;
+        var geometry1 = new THREE.IcosahedronBufferGeometry(radius, 1);
+
+        var count = geometry1.attributes.position.count;
+        // 为20面体添加颜色属性
+        geometry1.addAttribute('color', new THREE.BufferAttribute(new Float32Array(count * 3), 3));
+
+        var geometry2 = geometry1.clone();
+        var geometry3 = geometry1.clone();
+
+        var color = new THREE.Color();
+
+        var position1 = geometry1.attributes.position;
+        var position2 = geometry2.attributes.position;
+        var position3 = geometry3.attributes.position;
+
+        var color1 = geometry1.attributes.color;
+        var color2 = geometry2.attributes.color;
+        var color3 = geometry3.attributes.color;
+
+
+        // 使用HSL颜色空间来设置颜色
+        // 为每个顶点设置一种颜色
+        for(var  i =0; i<count; i++){
+            color.setHSL( (position1.getY(i) / radius+1)/2, 1.0, 0.5);
+            color1.setXYZ(i, color.r, color.g, color.b);
+
+            color.setHSL(0, (position2.getY(i)/radius +1)/2, 0.5);
+            color2.setXYZ(i, color.r, color.g, color.b);
+
+            color.setRGB(1, 0.8- (position3.getY(i)/radius +1)/2 ,0)
+            color3.setXYZ(i, color.r, color.g, color.b);
+        }
+
+
+        var material = new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            flatShading: true,
+            vertexColors: THREE.VertexColors,
+            shininess:0
+        })
+        var wireframeMaterial = new THREE.MeshBasicMaterial({
+            color:0x000000,
+            wireframe: true,
+            transparent: true
+        })
+        var mesh = new THREE.Mesh(geometry1, material)
+        var wireframe = new THREE.Mesh(geometry1, wireframeMaterial);
+        mesh.add(wireframe);
+        mesh.position.x = -400;
+        mesh.rotation.x = -.187;
+        scene.add(mesh);
+
+        var mesh = new THREE.Mesh( geometry2, material );
+        var wireframe = new THREE.Mesh( geometry2, wireframeMaterial );
+        mesh.add( wireframe );
+        mesh.position.x = 400;
+        scene.add( mesh );
+
+        var mesh = new THREE.Mesh( geometry3, material );
+        var wireframe = new THREE.Mesh( geometry3, wireframeMaterial );
+        mesh.add( wireframe );
+        scene.add( mesh );
+    }
+
+    function onDocumentMouseMove(e){
+        mouseX = e.clientX - windowHalfX;
+        mouseY = e.clientY - windowHalfY;
+    }
+
+
+    function animate(){
+        for(var i=0;i< views.length;i++){
+            views[i].render()
+        }
+        renderComplete()
+        requestAnimationFrame(animate)
+    }
+   
+</script>
+</html>

@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>3D仓库管理</title>
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-$END$
+    <div id="container"></div>
+
+    <script src="./lib/three.js"></script>
+    <script src="./js/common/utils.js"></script>
+    <script src="./js/Data/BuildingData.js"></script>
+    <script src="./js/objects/Cube.js"></script>
+    <script src="./lib/OrbitControls.js"></script>
+    <script src="./lib/stats.min.js"></script>
+    <script src="js/objects/Store3D.js"></script>
+    <script>
+        let store = new Store3D();
+        store.start()
+    </script>
 </body>
 </html>
