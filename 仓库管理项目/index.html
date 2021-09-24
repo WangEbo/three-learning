@@ -3,23 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <title>3D仓库管理</title>
-    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/store.css">
+    
+    <style>
+        body,#container{
+            width: 1920px;
+            height: 1080px;
+        }
+    </style>
 </head>
 <body>
     <div id="container"></div>
-
+    <div class="sidebar">
+        <img id="fps" class="buttonClass" title="性能调试" src="./img/icon/fps.svg">
+        <img id="store" class="buttonClass" title="显示仓库" src="./img/icon/store.svg">
+        <img id="group" class="buttonClass" title="显示巷道" src="./img/icon/group.svg">
+        <img id="shelf" class="buttonClass" title="显示架子" src="./img/icon/shelf.svg">
+        <img id="reset" class="buttonClass" title="复位场景" src="./img/icon/reset.svg">
+        <img id="temperature" class="buttonClass" title="车间温度" src="./img/icon/temperature.svg">
+        <img id="roomRate" class="buttonClass" title="库房利用率" src="./img/icon/roomRate.svg">
+    </div>
+    <!-- 仓库信息label框 -->
+    <div id="label"></div>
+    <!-- js库 -->
     <script src="./lib/three.js"></script>
     <script src="./lib/ThreeBSP.js"></script>
     <script src="./js/common/utils.js"></script>
-    <script src="./js/Data/BuildingData.js"></script>
-    <script src="./js/objects/Cube.js"></script>
     <script src="./lib/OrbitControls.js"></script>
     <script src="./lib/stats.min.js"></script>
-    <script src="js/objects/Store3D.js"></script>
+    <script src="./lib/ShaderPass.js"></script>
+    <script src="./lib/MTLLoader.js"></script>
+    <script src="./lib/OBJLoader.js"></script>
+    <script src="./lib/Tween.js"></script>
+
+    <script src="https://lib.baomitu.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="./lib/echarts.js"></script>
+    <!-- 程序js -->
+    
+    <script src="./js/Data/BuildingData.js"></script>
+    <script src="./js/objects/Cube.js"></script>
+    <script src="./js/common/CommonFunction.js"></script>
+    <script src="./js/Data/DataAnalyze.js"></script>
+    <script src="./js/objects/Store.js"></script>
     <script src="./js/objects/Wall.js"></script>
+    <script src="./js/objects/StoreArea.js"></script>
+    <script src="./js/objects/StoreGroup.js"></script>
+    <script src="./js/objects/StoreShelf.js"></script>
+    <script src="./js/objects/StoreGoods.js"></script>
+    <script src="./js/objects/StoreSign.js"></script>
+    <script src="./js/objects/Temperature.js"></script>
+    <script src="./js/objects/Route.js"></script>
+    <script src="./js/objects/RouteLine.js"></script>
+    <script src="./js/objects/AVGCar.js"></script>
+    <script src="./js/objects/Store3D.js"></script>
+    <script src="./js/Data/DataAnalyze.js"></script>
+    <script src="./js/Data/DataShow.js"></script>
+    <script src="./js/common/ObjectSelect.js"></script>
     <script>
-        let store = new Store3D();
+        window.store = new Store3D();
         store.start()
+
+        document.getElementById("fps").addEventListener('click', function () {
+            store.changeStats();
+        }, false);
+        document.getElementById("reset").addEventListener('click', function () {
+            store.orbitControl.reset();
+        }, false);
+        document.getElementById("store").addEventListener('click', function () {
+            store.changeStoreShow();
+        }, false);
+        document.getElementById("group").addEventListener('click', function () {
+            store.changeGroupShow();
+        }, false);
+        document.getElementById("shelf").addEventListener('click', function () {
+            store.changeShelfShow();
+        }, false);
+        document.getElementById("temperature").addEventListener('click', function () {
+            store.changeTemperatureShow();
+        }, false);
+        document.getElementById("roomRate").addEventListener('click',function () {
+            store.changeRoomRateShow();
+        },false)
     </script>
 </body>
 </html>

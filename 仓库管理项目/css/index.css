@@ -1,9 +1,4 @@
-body {
-  margin: 0;
-  background-color: #000;
-  color: #fff;
-  font-family: Moonspace;
-  font-size: 13px;
-  line-height: 24px;
-  overflow: hidden;
+body,#container{
+    width: 1920px;
+    height: 1080px;
 }

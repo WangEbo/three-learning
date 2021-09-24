@@ -20,7 +20,7 @@ const buildingObjects = {
         {
             objectName: 'backWall',
             objectType: 'cube',
-            length: 3400,
+            length: 3420,
             width: 20,
             height: 400,
             position: {
@@ -35,7 +35,7 @@ const buildingObjects = {
         {
             objectName: 'frontWall',
             objectType: 'wall',
-            length: 3400,
+            length: 3420,
             width: 20,
             height: 400,
             position: {
@@ -187,5 +187,61 @@ const buildingObjects = {
                 color: 0x5f7480
             }
         },
+        {
+            No: 'area0',
+            objectName: 'storeArea',
+            objectType: "StoreArea",
+            width: 1000,
+            Length: 1400,
+            Position:{
+                X: -850,
+                Z: 0
+            },
+            Title:{
+                TextColor:'DF1965',
+                Text:'胶片库区A',
+                FontSize:20,
+                Position:{
+                    X:-20,
+                    Z:550
+                }
+            }
+        },
+        {
+            No: 'area1',
+            objName: "storeArea",
+            objectNo:"01001",
+            objectType: "StoreArea",
+            Length:1400,
+            width:1000,
+            Position:{
+                X:850,
+                Z:0,
+            },
+            Title:{
+                TextColor:'DF1965',
+                Text:'胶片库区B',
+                FontSize:20,
+                Position:{
+                    X:-20,
+                    Z:550
+                }
+            }
+        },
+        //AGV小车路径
+        {
+            objName:"AGVRoute",
+            objectType:"route",
+            points:[
+                {x:-100,y:1,z:50},
+                {x:-500,y:1,z:50},
+                {x:-800,y:1,z:50},
+                {x:-800,y:1,z:420},
+                {x:-1400,y:1,z:420},
+                {x:-1400,y:1,z:480},
+                {x:-100,y:1,z:480},
+                {x:-100,y:1,z:50}
+            ]
+        }
     ]
 }
